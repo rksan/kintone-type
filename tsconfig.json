@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "./.configs/tsconfig.base.json"
+  ],
+  "include": [
+    "./src/**/*",
+    "./test/**/*",
+    "./.eslintrc",
+    "./.prittierrc"
+  ],
+  "exclude": [
+    // "./src/**/*.d.ts"
+  ],
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "outDir": "./dist"
+  }
+}
