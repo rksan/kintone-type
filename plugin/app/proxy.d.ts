@@ -11,7 +11,7 @@ export type proxy =
     headers: any,
     data: any,
     successCallback: (body: string, status: number, headers: any) => void,
-    failureCallback?: (err: string) => void
+    failureCallback?: (body: string) => void
   ) => void) &
     ((
       pluginId: string,
@@ -26,19 +26,19 @@ export type proxy =
       upload: ((
         pluginId: string,
         url: string,
-        method: "GET" | "POST" | "PUT" | "DELETE",
+        method: "POST" | "PUT",
         headers: any,
         data: {
           format: "RAW";
           value: Blob;
         },
         successCallback: (body: string, status: number, header: any) => void,
-        failureCallback?: (err: string) => void
+        failureCallback?: (body: string) => void
       ) => void) &
         ((
           pluginId: string,
           url: string,
-          method: "GET" | "POST" | "PUT" | "DELETE",
+          method: "POST" | "PUT",
           headers: any,
           data: {
             format: "RAW";

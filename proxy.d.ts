@@ -10,7 +10,7 @@ export type proxy =
     headers: any,
     data: any,
     successCallback: (body: string, status: number, headers: any) => void,
-    failureCallback?: (error: string) => void
+    failureCallback?: (body: string) => void
   ) => void) &
     ((
       url: string,
@@ -27,7 +27,7 @@ export type proxy =
         headers: any,
         data: { format: "RAW"; value: Blob },
         successCallback: (body: string, status: number, headers: any) => void,
-        failureCallback?: (error: string) => void
+        failureCallback?: (body: string) => void
       ) => void) &
         ((
           url: string,
