@@ -31,7 +31,7 @@ function fnProxy(
 function fnUpload(
   pluginId: string,
   url: string,
-  method: "GET" | "POST" | "PUT" | "DELETE",
+  method: "POST" | "PUT",
   headers: any,
   data: {
     format: "RAW";
@@ -43,7 +43,7 @@ function fnUpload(
 function fnUpload(
   pluginId: string,
   url: string,
-  method: "GET" | "POST" | "PUT" | "DELETE",
+  method: "POST" | "PUT",
   headers: any,
   data: {
     format: "RAW";
@@ -53,7 +53,7 @@ function fnUpload(
 function fnUpload(
   pluginId: string,
   url: string,
-  method: "GET" | "POST" | "PUT" | "DELETE",
+  method: "POST" | "PUT",
   headers: any,
   data: {
     format: "RAW";
