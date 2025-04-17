@@ -1,0 +1,9 @@
+*
+!**/*.d.ts
+!**/*.d.cts
+!**/*.d.mts
+!**/*.d.*.ts
+
+demo/**
+node_modules/**
+.vscode/**
