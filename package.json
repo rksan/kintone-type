@@ -1,8 +1,23 @@
 {
   "name": "@rksan/kintone-type",
   "version": "0.0.1",
-  "description": "define type",
+  "description": "Typescript type definition for kintone javascript api",
   "types": "index",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rksan/kintone-type.git"
+  },
+  "keywords": [
+    "kintone",
+    "type"
+  ],
+  "bugs": {
+    "url": "https://github.com/rksan/kintone-type/issues"
+  },
+  "homepage": "https://github.com/rksan/kintone-type#readme",
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/eslint-parser": "^7.22.15",
