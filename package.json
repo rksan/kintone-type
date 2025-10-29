@@ -1,6 +1,6 @@
 {
   "name": "@rksan/kintone-type",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Typescript type definition for kintone javascript api",
   "types": "index",
   "publishConfig": {
