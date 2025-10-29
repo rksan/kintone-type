@@ -14,12 +14,12 @@ export type record = {
   /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-record/
    */
-  get: () => kintone.Record | null;
+  get: () => { record: any } | null;
 
   /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/record/set-record-value/
    */
-  set: (record: kintone.Record) => void;
+  set: (record: { record: any }) => void;
 
   /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-record-field-element/
