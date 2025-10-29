@@ -3,6 +3,7 @@ import proxy from "./app/proxy";
 
 const app: app = {
   proxy: proxy,
+
   getConfig: function (pluginId: string): any {
     throw new Error("Function not implemented.");
   },

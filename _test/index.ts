@@ -6,12 +6,124 @@ import kintone from "kintone.d";
   console.info("[INFO]", user.id);
   console.info("[INFO]", user.code);
 
+  const preference: kintone.UserPreference = await kintone.getUserPreference();
+  console.info("[INFO]", preference.timeFormat);
+  console.info("[INFO]", preference.emailNotifications);
+  console.info("[INFO]", preference.desktopNotifications);
+
+  if (kintone.isUsersAndSystemAdministrator()) {
+    console.info("[INFO]", "user is Administrator");
+  }
+
   const token: string = kintone.getRequestToken();
   console.info("[INFO]", token);
 
   const version: number = kintone.getUiVersion();
   console.info("[INFO]", version);
 
+  const services = await kintone.getAvailableServices();
+  console.info("[INFO]", services);
+
+  const domain = await kintone.getDomain();
+  console.info("[INFO]", domain);
+
+  const apis = await kintone.getAvailableApiTypes();
+  console.info("[INFO]", apis);
+
+  if (await kintone.isAccessWithClientCertificateAuthentication()) {
+    console.info("[INFO]", "certificate auth.");
+  }
+
+  if (await kintone.isMobileApp()) {
+    console.info("[INFO]", "mobile app.");
+  }
+
+  if (await kintone.isMobilePage()) {
+    console.info("[INFO]", "mobile page");
+  }
+
+  if (await kintone.isRevampedUI()) {
+    console.info("[INFO]", "revamped ui.");
+  }
+
+  const pageType = await kintone.getPageType();
+  console.info("[INFO]", pageType);
+
+  await kintone.showConfirmDialog({
+    title: "タイトル",
+    body: "ボディ",
+    showOkButton: true,
+    okButtonText: "OK",
+    showCancelButton: true,
+    cancelButtonText: "Cancel",
+  });
+
+  let confirm = await kintone.showConfirmDialog({});
+
+  if (confirm === "OK") {
+    console.info("[INFO]", "OK");
+  } else if (confirm === "CANCEL") {
+    console.info("[INFO]", "CANCEL");
+  } else if (confirm === "CLOSE") {
+    console.info("[INFO]", "CLOSE");
+  }
+
+  (
+    await kintone.createDialog({
+      title: "タイトル",
+      body: document.createElement("<div>"),
+      showOkButton: true,
+      okButtonText: "OK",
+      showCancelButton: true,
+      cancelButtonText: "CANCEL",
+      showCloseButton: true,
+      beforeClose: (result) => {
+        if (result === "OK") {
+          return false;
+        } else if (result === "CANCEL") {
+          return undefined;
+        } else if (result === "CLOSE") {
+          return;
+        }
+        return true;
+      },
+    })
+  ).close();
+
+  await kintone.createDialog({
+    beforeClose: async (result) => {
+      if (result === "OK") {
+        return false;
+      } else if (result === "CANCEL") {
+        return;
+      } else if (result === "CLOSE") {
+        return;
+      }
+      return await Promise.resolve(true);
+    },
+  });
+
+  let dialog = await (await kintone.createDialog({})).show();
+
+  if (dialog === "OK") {
+    console.info("[INFO]", "OK");
+  } else if (dialog === "CANCEL") {
+    console.info("[INFO]", "CANCEL");
+  } else if (dialog === "CLOSE") {
+    console.info("[INFO]", "CLOSE");
+  } else if (dialog === "FUNCTION") {
+    console.info("[INFO]", "FUNCTION");
+  }
+
+  await kintone.showNotification("INFO", "[INFO] information");
+  await kintone.showNotification("SUCCESS", "[SUCCESS] success");
+  await kintone.showNotification("ERROR", "[ERROR] error");
+
+  await kintone.showLoading("VISIBLE");
+  await kintone.showLoading("HIDDEN");
+
+  //---
+  // field type
   let record: kintone.Record | null;
 
   record = {
@@ -173,12 +285,29 @@ import kintone from "kintone.d";
   // ---
   // kintone.app
   // kintone.mobile.app
+  response = await kintone.app.get();
+
   let id: number | null = null;
 
   id = kintone.app.getId();
   id = kintone.mobile.app.getId();
 
-  response = await kintone.app.getIcons([1]);
+  response = await kintone.app.getFormFields();
+
+  response = await kintone.app.getFormLayout();
+
+  if ((await kintone.app.isTestEnvironment()) === true) {
+    console.info("[INFO]", "is environment");
+  }
+
+  if ((await kintone.app.isMaintenanceMode()) === true) {
+    console.info("[INFO]", "is maintenance mode");
+  }
+
+  await kintone.app.showDescription("OPEN");
+  await kintone.app.showDescription("CLOSED");
+
+  response = await kintone.app.getIcons([1, 2, 3]);
 
   let elements: Element[] | null = null;
 
@@ -190,13 +319,10 @@ import kintone from "kintone.d";
   element = kintone.app.getHeaderMenuSpaceElement();
 
   element = kintone.app.getHeaderSpaceElement();
-  element = kintone.mobile.app.getHeaderSpaceElement();
 
-  id = kintone.app.getLookupTargetAppId("field_code");
-  id = kintone.mobile.app.getLookupTargetAppId("field_code");
+  response = await kintone.app.getView();
 
-  id = kintone.app.getRelatedRecordsTargetAppId("field_code");
-  id = kintone.mobile.app.getRelatedRecordsTargetAppId("field_code");
+  response = await kintone.app.getViews();
 
   let query: string | null;
 
@@ -205,6 +331,25 @@ import kintone from "kintone.d";
 
   query = kintone.app.getQuery();
   query = kintone.mobile.app.getQuery();
+
+  element = kintone.mobile.app.getHeaderSpaceElement();
+
+  id = kintone.app.getLookupTargetAppId("field_code");
+  id = kintone.mobile.app.getLookupTargetAppId("field_code");
+
+  id = kintone.app.getRelatedRecordsTargetAppId("field_code");
+  id = kintone.mobile.app.getRelatedRecordsTargetAppId("field_code");
+
+  response = await kintone.app.getStatus();
+
+  response = await kintone.app.record.getStatusActions();
+
+  response = await kintone.app.record.getAssignees();
+
+  response = await kintone.app.getCategories();
+
+  let permissions = await kintone.app.getPermissions();
+  console.info("[INFO]", permissions.addRecord, permissions.editApp);
 
   // ---
   // kintone.app.record
@@ -216,6 +361,98 @@ import kintone from "kintone.d";
   record = kintone.mobile.app.record.get();
 
   if (record) kintone.app.record.set(record);
+
+  element = kintone.app.record.getFieldElement("field_code");
+  element = kintone.mobile.app.record.getFieldElement("field_code");
+
+  element = kintone.app.record.getSpaceElement("element_id");
+  element = kintone.mobile.app.record.getSpaceElement("element_id");
+
+  kintone.app.record.setGroupFieldOpen("field_code", true);
+  kintone.mobile.app.record.setGroupFieldOpen("field_code", true);
+
+  if ((await kintone.app.record.isGroupFieldOpen("field_code")) === true) {
+    console.info("[INFO]", "group is opened");
+  }
+  if (
+    (await kintone.mobile.app.record.isGroupFieldOpen("field_code")) === true
+  ) {
+    console.info("[INFO]", "group is opened");
+  }
+
+  element = kintone.app.record.getHeaderMenuSpaceElement();
+
+  let recordPermission = await kintone.app.record.getPermissions();
+  console.info(
+    "[INFO]",
+    recordPermission.editRecord,
+    recordPermission.deleteRecord
+  );
+
+  response = await kintone.app.record.getFieldPermissions();
+
+  response = kintone.app.record.getStatusHistory();
+  response = kintone.app.record.getStatusHistory(0);
+  response = kintone.app.record.getStatusHistory(0, 100);
+
+  kintone.app.record.setFieldShown("field_code", true);
+  kintone.mobile.app.record.setFieldShown("field_code", true);
+
+  if ((await kintone.app.record.isFieldVisible("field_code")) === true) {
+    console.info("[INFO]", "field is visible");
+  }
+
+  if ((await kintone.mobile.app.record.isFieldVisible("field_code")) === true) {
+    console.info("[INFO]", "field is visible");
+  }
+
+  await kintone.app.showAddRecordButton("VISIBLE");
+  await kintone.app.showAddRecordButton("HIDDEN");
+  await kintone.mobile.app.showAddRecordButton("VISIBLE");
+  await kintone.mobile.app.showAddRecordButton("HIDDEN");
+
+  await kintone.app.record.showEditRecordButton("VISIBLE");
+  await kintone.app.record.showEditRecordButton("HIDDEN");
+  await kintone.mobile.app.record.showEditRecordButton("VISIBLE");
+  await kintone.mobile.app.record.showEditRecordButton("HIDDEN");
+
+  await kintone.app.record.showDuplicateRecordButton("VISIBLE");
+  await kintone.app.record.showDuplicateRecordButton("HIDDEN");
+
+  await kintone.app.showAppSettingsButton("VISIBLE");
+  await kintone.app.showAppSettingsButton("HIDDEN");
+
+  await kintone.app.showOptionsButton("VISIBLE");
+  await kintone.app.showOptionsButton("HIDDEN");
+  await kintone.mobile.app.showOptionsButton("VISIBLE");
+  await kintone.mobile.app.showOptionsButton("HIDDEN");
+
+  await kintone.app.record.showPager("VISIBLE");
+  await kintone.app.record.showPager("HIDDEN");
+  await kintone.mobile.app.record.showPager("VISIBLE");
+  await kintone.mobile.app.record.showPager("HIDDEN");
+
+  await kintone.app.record.showSideBar("OPEN");
+  await kintone.app.record.showSideBar("CLOSED");
+  await kintone.app.record.showSideBar("COMMENTS");
+  await kintone.app.record.showSideBar("HISTORY");
+
+  await kintone.app.showFilterButton("VISIBLE");
+  await kintone.app.showFilterButton("HIDDEN");
+  await kintone.mobile.app.showFilterButton("VISIBLE");
+  await kintone.mobile.app.showFilterButton("HIDDEN");
+
+  await kintone.app.showReportButton("VISIBLE");
+  await kintone.app.showReportButton("HIDDEN");
+
+  await kintone.app.showViewAndReportSelector("VISIBLE");
+  await kintone.app.showViewAndReportSelector("HIDDEN");
+
+  await kintone.mobile.app.showViewSelector("VISIBLE");
+  await kintone.mobile.app.showViewSelector("HIDDEN");
+
+  await kintone.mobile.app.showReportSelector("VISIBLE");
+  await kintone.mobile.app.showReportSelector("HIDDEN");
 
   // ---
   // kintone.event
@@ -277,8 +514,22 @@ import kintone from "kintone.d";
   element = kintone.mobile.portal.getContentSpaceElement();
 
   // kintone.space
+  let spaceInfo = await kintone.space.get();
+  console.info("[INFO]", spaceInfo.id, spaceInfo.name, spaceInfo.isGuest);
+
   element = kintone.space.portal.getContentSpaceElement();
   element = kintone.mobile.space.portal.getContentSpaceElement();
+
+  response = await kintone.space.getPermissions();
+
+  // kintone.system
+  response = await kintone.system.getAvailableFeatures();
+  response = await kintone.system.getPermissions();
+
+  // kintone.license
+  response = await kintone.license.isTrial();
+
+  response = await kintone.license.getSubscriptionPlan();
 
   // kintone.plugin
   const pluginId = "pluginId";
@@ -345,5 +596,22 @@ import kintone from "kintone.d";
       value: new Blob(),
     }
   );
+
+  // user
+  let organizationTitles: any;
+  organizationTitles = await kintone.user.getOrganizations();
+  organizationTitles = await kintone.user.getOrganizations(user.code);
+
+  let groups: any;
+  groups = await kintone.user.getGroups();
+  groups = await kintone.user.getGroups(user.code);
+
+  let customFields: any;
+  customFields = await kintone.user.getCustomFields();
+  customFields = await kintone.user.getCustomFields(user.code);
+
+  let icons: any;
+  icons = await kintone.user.getIcons([user.code]);
+
   // @ts-ignore
 })(window.kintone);

@@ -1,6 +1,6 @@
 import { app } from "./mobile/app.d";
 import { portal } from "./mobile/portal.d";
-import { space } from "./space.d";
+import { space } from "./mobile/space.d";
 
 export namespace mobile {}
 

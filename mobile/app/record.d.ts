@@ -34,9 +34,27 @@ export type record = {
   setGroupFieldOpen(fieldCode: string, isOpen: boolean): void;
 
   /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/is-group-field-open/
+   */
+  isGroupFieldOpen: (fieldCode: string) => Promise<boolean>;
+
+  /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-a-field/
    */
   setFieldShown(fieldCode: string, isShown: boolean): void;
 
-  // getHeaderMenuSpaceElement(): Element | null;
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/is-field-visible/
+   */
+  isFieldVisible: (fieldCode) => Promise<boolean>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-edit-record-button/
+   */
+  showEditRecordButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-record-nav-button/
+   */
+  showPager: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
 };

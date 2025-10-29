@@ -16,6 +16,16 @@ export type app = {
   getFieldElements(fieldCode: string): Element[] | null;
 
   /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-record-list-query/
+   */
+  getQueryCondition(): string | null;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-record-list-query-with-order-by-limit-offset/
+   */
+  getQuery(): string | null;
+
+  /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-mobile-header-element/
    */
   getHeaderSpaceElement(): Element | null;
@@ -31,12 +41,27 @@ export type app = {
   getRelatedRecordsTargetAppId(fieldCode: string): number | null;
 
   /**
-   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-record-list-query/
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-add-record-button/
    */
-  getQueryCondition(): string | null;
+  showAddRecordButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
 
   /**
-   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-record-list-query-with-order-by-limit-offset/
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-option-button/
    */
-  getQuery(): string | null;
+  showOptionsButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-filter-button/
+   */
+  showFilterButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-mobile-view-selector/
+   */
+  showViewSelector: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-mobile-report-selector/
+   */
+  showReportSelector: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
 };

@@ -94,6 +94,16 @@ import type kintone from "@rksan/kintone-type";
 })(window.kintone);
 ```
 
+# History
+
+- 1.1.0
+  - 2025/10/12 アップデートに対応
+  - [kintone API アップデート情報](https://cybozu.dev/ja/kintone/news/api-updates/2025-10/)
+- 1.0.1
+  - バグ修正
+- 1.0
+  - 初版
+
 # Author
 
 @rksan https://github.com/rksan | github

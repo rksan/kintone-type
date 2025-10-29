@@ -37,12 +37,72 @@ export type record = {
   setGroupFieldOpen: (fieldCode: string, isOpen: boolean) => void;
 
   /**
-   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-a-field/
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/is-group-field-open/
    */
-  setFieldShown: (fieldCode: string, isShown: boolean) => void;
+  isGroupFieldOpen: (fieldCode: string) => Promise<boolean>;
 
   /**
    * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-record-header-menu-element/
    */
   getHeaderMenuSpaceElement: () => Element | null;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-record-permissions/
+   */
+  getPermissions: () => Promise<{ editRecord: boolean; deleteRecord: boolean }>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-record-field-permissions/
+   */
+  getFieldPermissions: () => Promise<kintone.Response>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/get-status-history/
+   */
+  getStatusHistory: (
+    offset?: number,
+    limit?: number
+  ) => Promise<kintone.Response>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-a-field/
+   */
+  setFieldShown: (fieldCode: string, isShown: boolean) => void;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/is-field-visible/
+   */
+  isFieldVisible: (fieldCode) => Promise<boolean>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-status-actions/
+   */
+  getStatusActions: () => Promise<kintone.Response>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/app/get-status-assignees/
+   */
+  getAssignees: () => Promise<kintone.Response>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-edit-record-button/
+   */
+  showEditRecordButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-duplicate-record-button/
+   */
+  showDuplicateRecordButton: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-record-nav-button/
+   */
+  showPager: (state: "VISIBLE" | "HIDDEN") => Promise<void>;
+
+  /**
+   * @see https://cybozu.dev/ja/kintone/docs/js-api/record/show-or-hide-side-bar/
+   */
+  showSideBar: (
+    state: "OPEN" | "CLOSED" | "COMMENTS" | "HISTORY"
+  ) => Promise<void>;
 };
