@@ -96,6 +96,8 @@ import type kintone from "@rksan/kintone-type";
 
 # History
 
+- 1.1.1
+  - `kintone.app.record.get() | se()`のバグ修正
 - 1.1.0
   - 2025/10/12 アップデートに対応
   - [kintone API アップデート情報](https://cybozu.dev/ja/kintone/news/api-updates/2025-10/)
