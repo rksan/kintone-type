@@ -124,9 +124,9 @@ import kintone from "kintone.d";
 
   //---
   // field type
-  let record: kintone.Record | null;
+  let record: any | null;
 
-  record = {
+  const rec = {
     $id: {
       type: "__ID__",
       value: "1",

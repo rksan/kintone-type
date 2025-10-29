@@ -12,10 +12,10 @@ const kintone: kintone = {
       getId: function (): number | null {
         throw new Error("Function not implemented.");
       },
-      get: function (): kintone.Record | null {
+      get: function (): { record: any } | null {
         throw new Error("Function not implemented.");
       },
-      set: function (record: kintone.Record): void {
+      set: function (record: { record: any }): void {
         throw new Error("Function not implemented.");
       },
       getFieldElement: function (fieldCode: string): Element | null {
@@ -27,13 +27,10 @@ const kintone: kintone = {
       setGroupFieldOpen: function (fieldCode: string, isOpen: boolean): void {
         throw new Error("Function not implemented.");
       },
-      setFieldShown: function (fieldCode: string, isShown: boolean): void {
+      isGroupFieldOpen: function (fieldCode: string): Promise<boolean> {
         throw new Error("Function not implemented.");
       },
       getHeaderMenuSpaceElement: function (): Element | null {
-        throw new Error("Function not implemented.");
-      },
-      isGroupFieldOpen: function (fieldCode: string): Promise<boolean> {
         throw new Error("Function not implemented.");
       },
       getPermissions: function (): Promise<{
@@ -49,6 +46,9 @@ const kintone: kintone = {
         offset?: number,
         limit?: number
       ): Promise<kintone.Response> {
+        throw new Error("Function not implemented.");
+      },
+      setFieldShown: function (fieldCode: string, isShown: boolean): void {
         throw new Error("Function not implemented.");
       },
       isFieldVisible: function (fieldCode: any): Promise<boolean> {
@@ -214,10 +214,10 @@ const kintone: kintone = {
         getId: function (): number | null {
           throw new Error("Function not implemented.");
         },
-        get: function (): kintone.Record | null {
+        get: function (): { record: any } | null {
           throw new Error("Function not implemented.");
         },
-        set: function (record: kintone.Record): void {
+        set: function (record: { record: any }): void {
           throw new Error("Function not implemented.");
         },
         getFieldElement: function (fieldCode: string): Element | null {
@@ -229,10 +229,10 @@ const kintone: kintone = {
         setGroupFieldOpen: function (fieldCode: string, isOpen: boolean): void {
           throw new Error("Function not implemented.");
         },
-        setFieldShown: function (fieldCode: string, isShown: boolean): void {
+        isGroupFieldOpen: function (fieldCode: string): Promise<boolean> {
           throw new Error("Function not implemented.");
         },
-        isGroupFieldOpen: function (fieldCode: string): Promise<boolean> {
+        setFieldShown: function (fieldCode: string, isShown: boolean): void {
           throw new Error("Function not implemented.");
         },
         isFieldVisible: function (fieldCode: any): Promise<boolean> {
